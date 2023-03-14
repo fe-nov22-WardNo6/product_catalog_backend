@@ -1,6 +1,6 @@
 import express from 'express';
-import * as goodController from '../controller/products';
+import * as productController from '../controller/products';
 
 export const router = express.Router();
 
-router.get('/', goodController.getAll);
+router.get('/', productController.getAll);
