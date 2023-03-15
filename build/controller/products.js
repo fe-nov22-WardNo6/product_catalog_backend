@@ -35,7 +35,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAll = void 0;
 const goodService = __importStar(require("../services/products"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const goods = yield goodService.getAll();
+    const { perPage, currentPage } = req.query;
+    if (!perPage && !currentPage) {
+        const goods = yield goodService.getAll();
+        res.send(goods);
+        return;
+    }
+    if (!perPage || !currentPage) {
+        res.sendStatus(400);
+        return;
+    }
+    const goods = yield goodService.getAllWithPagination(+perPage, +currentPage);
     res.send(goods);
 });
 exports.getAll = getAll;

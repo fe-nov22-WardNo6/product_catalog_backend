@@ -8,7 +8,10 @@ const cors_1 = __importDefault(require("cors"));
 const product_1 = require("./routes/product");
 const initDB_1 = require("./utils/initDB");
 const app = (0, express_1.default)();
+const port = 5000;
 (0, initDB_1.dbInit)();
 app.use((0, cors_1.default)());
-app.use('/goods', express_1.default.json(), product_1.router);
-app.listen(5000);
+app.use('/products', express_1.default.json(), product_1.router);
+app.listen(port, () => {
+    console.log(`project start at http://localhost:${port}`);
+});
