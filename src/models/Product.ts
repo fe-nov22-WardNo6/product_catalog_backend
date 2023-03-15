@@ -28,61 +28,61 @@ export class Product extends Model {
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING
+    type: DataType.STRING,
   })
-  phoneId: string
+  phoneId: string;
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING
+    type: DataType.STRING,
   })
-  name: string
+  name: string;
 
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER
+    type: DataType.INTEGER,
   })
-  fullPrice: number
+  fullPrice: number;
 
   @AllowNull(true)
   @Column({
-    type: DataType.INTEGER
+    type: DataType.INTEGER,
   })
-  price: number
+  price: number;
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING
+    type: DataType.STRING,
   })
-  screen: string
+  screen: string;
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING
+    type: DataType.STRING,
   })
-  capacity: string
+  capacity: string;
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING
+    type: DataType.STRING,
   })
-  color: string
+  color: string;
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING
+    type: DataType.STRING,
   })
-  ram: string
-  
+  ram: string;
+
   @AllowNull(false)
   @Column({
-    type: DataType.INTEGER
+    type: DataType.INTEGER,
   })
-  year: number
+  year: number;
 
   @AllowNull(true)
   @Column({
-    type: DataType.STRING
+    type: DataType.STRING,
   })
-  image: string
+  image: string;
 }
