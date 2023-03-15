@@ -1,2 +1,5 @@
 node_modules
 .env
+setup_files
+setup.ts
+

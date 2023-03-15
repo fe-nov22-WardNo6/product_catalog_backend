@@ -5,11 +5,14 @@ import { router as productRouter } from './routes/product';
 import { dbInit } from './utils/initDB';
 
 const app = express();
+const port = 5000;
 
 dbInit();
 
 app.use(cors());
 
-app.use('/goods', express.json(), productRouter);
+app.use('/products', express.json(), productRouter);
 
-app.listen(5000);
+app.listen(port, () => {
+  console.log(`project start at http://localhost:${port}`);
+});
