@@ -6,12 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/server.js",
+    "start-dev": "nodemon src/server.ts",
     "build": "tsc",
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint . --ignore-path .gitignore --fix",
     "fix-style": "npm run format && npm run lint",
     "prepare": "husky install",
-    "setup": "ts-node src/setup.ts"
+    "setup": "ts-node setup_files/setup.ts"
   },
   "repository": {
     "type": "git",
