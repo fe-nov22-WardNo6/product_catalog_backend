@@ -9,9 +9,9 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  tableName: 'products',
+  tableName: 'phones',
 })
-export class Product extends Model {
+export class Phone extends Model {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)
