@@ -11,6 +11,7 @@ export const getAll = async (req: Request, res: Response) => {
 
   const getAllCounts = await phonesService.getAllCount();
 
+  res.setHeader('Access-Control-Allow-Headers', 'Count');
   res.setHeader('Count', getAllCounts);
 
   res.send(products);

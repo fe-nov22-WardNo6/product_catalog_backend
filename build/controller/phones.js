@@ -38,6 +38,7 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { perPage = '16', currentPage = '1' } = req.query;
     const products = yield phonesService.getAllWithPagination(+perPage, +currentPage);
     const getAllCounts = yield phonesService.getAllCount();
+    res.setHeader('Access-Control-Allow-Headers', 'Count');
     res.setHeader('Count', getAllCounts);
     res.send(products);
 });
