@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Documentation of product_catalog API</h1>
+    <h2>BASE_URL: https://product-catalog-backend-vhc5.onrender.com</h2>
+    <h3>1. Get: /phones</h3>
+    <div>
+      <p>Return list of phones.</p>
+      <ul>
+        <li>
+          <p>- Without search params: get collection of first 16 phones.</p>
+          <span>Example: BASE_URL/phones</span>
+        </li>
+        <li>
+          <p>
+            - With pagination: required url search params: perPage and
+            currentPage.
+          </p>
+          <span>Example: BASE_URL/phones?perPage=5&currentPage=2</span>
+
+          <p>*Response HEADERS has count of all phones</p>
+        </li>
+      </ul>
+    </div>
+
+    <h3>2. Get: /phones/:phoneId</h3>
+    <div>
+      <p>Return extend information of phone.</p>
+      <ul>
+        <li>
+          <p>- Required params "phoneUrl"</p>
+          <span>Example: BASE_URL/phones/phoneId</span>
+        </li>
+      </ul>
+    </div>
+
+    <h3>3. Get: /downloads</h3>
+    <div>
+      <p>Return image of item.</p>
+      <ul>
+        <li>
+          <p>- Required search params "url"</p>
+          <span
+            >Example:
+            BASE_URL/download?url=img/phones/apple-iphone-7/black/00.jpg</span
+          >
+        </li>
+      </ul>
+    </div>
+
+    <h3>4.Get: /categories</h3>
+    <div>
+      <p>Return all categories.</p>
+      <ul>
+        <li>
+          <span>Example: BASE_URL/categories</span>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

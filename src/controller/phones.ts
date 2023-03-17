@@ -9,6 +9,10 @@ export const getAll = async (req: Request, res: Response) => {
     +currentPage,
   );
 
+  const getAllCounts = await phonesService.getAllCount();
+
+  res.setHeader('Count', getAllCounts);
+
   res.send(products);
 };
 

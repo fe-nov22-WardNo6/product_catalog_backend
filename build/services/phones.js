@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getByPhoneId = exports.getAllWithPagination = exports.getAll = void 0;
+exports.getAllCount = exports.getByPhoneId = exports.getAllWithPagination = exports.getAll = void 0;
 const Phone_1 = require("../models/Phone");
 const PhoneExtended_1 = require("../models/PhoneExtended");
 const getAll = () => __awaiter(void 0, void 0, void 0, function* () { return Phone_1.Phone.findAll(); });
@@ -29,3 +29,7 @@ const getByPhoneId = (phoneId) => __awaiter(void 0, void 0, void 0, function* ()
     return PhoneExtended_1.PhoneExtended.findOne({ where: { id: phoneId } });
 });
 exports.getByPhoneId = getByPhoneId;
+const getAllCount = () => __awaiter(void 0, void 0, void 0, function* () {
+    return Phone_1.Phone.count();
+});
+exports.getAllCount = getAllCount;

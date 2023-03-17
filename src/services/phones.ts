@@ -21,3 +21,7 @@ export const getByPhoneId = async (phoneId: string) => {
   console.log(phoneId);
   return PhoneExtended.findOne({ where: { id: phoneId } });
 };
+
+export const getAllCount = async () => {
+  return Phone.count();
+};
