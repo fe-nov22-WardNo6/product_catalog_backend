@@ -32,23 +32,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getByPhoneId = exports.getAll = void 0;
-const phonesService = __importStar(require("../services/phones"));
+exports.getAll = void 0;
+const countService = __importStar(require("../services/count"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { perPage = '16', currentPage = '1' } = req.query;
-    const products = yield phonesService.getAllWithPagination(+perPage, +currentPage);
-    // const count = await phonesService.getAllCount();
-    // res.send([products, count]);
-    res.send(products);
+    const { category = 'phones' } = req.params;
+    const count = yield countService.getAll(category);
+    res.send({ count });
 });
 exports.getAll = getAll;
-const getByPhoneId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { phoneId } = req.params;
-    const phone = yield phonesService.getByPhoneId(phoneId);
-    if (!phone) {
-        res.sendStatus(404);
-        return;
-    }
-    res.send(phone);
-});
-exports.getByPhoneId = getByPhoneId;
