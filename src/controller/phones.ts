@@ -8,12 +8,8 @@ export const getAll = async (req: Request, res: Response) => {
     +perPage,
     +currentPage,
   );
-
-  const getAllCounts = await phonesService.getAllCount();
-
-  res.setHeader('Access-Control-Allow-Headers', 'Count');
-  res.setHeader('Count', getAllCounts);
-
+  // const count = await phonesService.getAllCount();
+  // res.send([products, count]);
   res.send(products);
 };
 
