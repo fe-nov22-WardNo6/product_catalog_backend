@@ -32,13 +32,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getByPhoneId = exports.getAll = void 0;
+exports.getCollection = exports.getByPhoneId = exports.getAll = void 0;
 const phonesService = __importStar(require("../services/phones"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { perPage = '16', currentPage = '1' } = req.query;
-    const products = yield phonesService.getAllWithPagination(+perPage, +currentPage);
-    // const count = await phonesService.getAllCount();
-    // res.send([products, count]);
+    const { perPage = '16', currentPage = '1', sortBy = '' } = req.query;
+    const products = yield phonesService.getAllWithPagination(+perPage, +currentPage, String(sortBy).toLowerCase());
     res.send(products);
 });
 exports.getAll = getAll;
@@ -52,3 +50,13 @@ const getByPhoneId = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     res.send(phone);
 });
 exports.getByPhoneId = getByPhoneId;
+const getCollection = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { collectionName } = req.params;
+    const collection = yield phonesService.getCollection(collectionName);
+    if (!(collection === null || collection === void 0 ? void 0 : collection.length)) {
+        res.sendStatus(404);
+        return;
+    }
+    res.send(collection);
+});
+exports.getCollection = getCollection;

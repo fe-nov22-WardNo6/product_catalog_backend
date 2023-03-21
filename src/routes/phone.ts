@@ -5,3 +5,4 @@ export const router = express.Router();
 
 router.get('/', phoneController.getAll);
 router.get('/:phoneId', phoneController.getByPhoneId);
+router.get('/collection/:collectionName', phoneController.getCollection);

@@ -32,3 +32,4 @@ const phoneController = __importStar(require("../controller/phones"));
 exports.router = express_1.default.Router();
 exports.router.get('/', phoneController.getAll);
 exports.router.get('/:phoneId', phoneController.getByPhoneId);
+exports.router.get('/collection/:collectionName', phoneController.getCollection);
