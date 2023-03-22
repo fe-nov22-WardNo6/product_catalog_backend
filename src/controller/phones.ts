@@ -2,12 +2,18 @@ import { Request, Response } from 'express';
 import * as phonesService from '../services/phones';
 
 export const getAll = async (req: Request, res: Response) => {
-  const { perPage = '16', currentPage = '1', sortBy = '' } = req.query;
+  const {
+    perPage = '16',
+    currentPage = '1',
+    sortBy = '',
+    searchQuery = '',
+  } = req.query;
 
   const products = await phonesService.getAllWithPagination(
     +perPage,
     +currentPage,
     String(sortBy).toLowerCase(),
+    String(searchQuery),
   );
 
   res.send(products);
