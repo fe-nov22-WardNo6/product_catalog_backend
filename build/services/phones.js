@@ -15,34 +15,69 @@ const PhoneExtended_1 = require("../models/PhoneExtended");
 const sequelize_1 = require("sequelize");
 const getAll = () => __awaiter(void 0, void 0, void 0, function* () { return Phone_1.Phone.findAll(); });
 exports.getAll = getAll;
-const getAllWithPagination = (perPage, currentPage, sortBy) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllWithPagination = (perPage, currentPage, sortBy, searchQuery) => __awaiter(void 0, void 0, void 0, function* () {
     const productsOnPage = perPage * currentPage;
     const offset = productsOnPage - perPage;
     const limit = perPage;
+    let allPhone;
+    const currentQuery = searchQuery;
     switch (sortBy) {
         case 'newest':
-            return Phone_1.Phone.findAll({
+            allPhone = yield Phone_1.Phone.findAndCountAll({
                 order: [['year', 'DESC']],
                 offset,
                 limit,
+                where: {
+                    [sequelize_1.Op.and]: [
+                        (0, sequelize_1.where)((0, sequelize_1.fn)('REPLACE', (0, sequelize_1.fn)('LOWER', (0, sequelize_1.col)('name')), ' ', ''), {
+                            [sequelize_1.Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+                        }),
+                    ],
+                },
             });
+            return allPhone;
         case 'cheapest':
-            return Phone_1.Phone.findAll({
+            allPhone = yield Phone_1.Phone.findAndCountAll({
                 order: [['price', 'ASC']],
                 offset,
                 limit,
+                where: {
+                    [sequelize_1.Op.and]: [
+                        (0, sequelize_1.where)((0, sequelize_1.fn)('REPLACE', (0, sequelize_1.fn)('LOWER', (0, sequelize_1.col)('name')), ' ', ''), {
+                            [sequelize_1.Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+                        }),
+                    ],
+                },
             });
+            return allPhone;
         case 'expensive':
-            return Phone_1.Phone.findAll({
+            allPhone = yield Phone_1.Phone.findAndCountAll({
                 order: [['price', 'DESC']],
                 offset,
                 limit,
+                where: {
+                    [sequelize_1.Op.and]: [
+                        (0, sequelize_1.where)((0, sequelize_1.fn)('REPLACE', (0, sequelize_1.fn)('LOWER', (0, sequelize_1.col)('name')), ' ', ''), {
+                            [sequelize_1.Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+                        }),
+                    ],
+                },
             });
+            return allPhone;
         default:
-            return Phone_1.Phone.findAll({
+            allPhone = yield Phone_1.Phone.findAndCountAll({
                 offset,
                 limit,
+                where: {
+                    [sequelize_1.Op.and]: [
+                        (0, sequelize_1.where)((0, sequelize_1.fn)('REPLACE', (0, sequelize_1.fn)('LOWER', (0, sequelize_1.col)('name')), ' ', ''), {
+                            [sequelize_1.Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+                        }),
+                    ],
+                },
             });
+            console.log(allPhone);
+            return allPhone;
     }
 });
 exports.getAllWithPagination = getAllWithPagination;

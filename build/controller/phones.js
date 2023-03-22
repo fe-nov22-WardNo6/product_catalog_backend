@@ -35,8 +35,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCollection = exports.getByPhoneId = exports.getAll = void 0;
 const phonesService = __importStar(require("../services/phones"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { perPage = '16', currentPage = '1', sortBy = '' } = req.query;
-    const products = yield phonesService.getAllWithPagination(+perPage, +currentPage, String(sortBy).toLowerCase());
+    const { perPage = '16', currentPage = '1', sortBy = '', searchQuery = '', } = req.query;
+    const products = yield phonesService.getAllWithPagination(+perPage, +currentPage, String(sortBy).toLowerCase(), String(searchQuery));
     res.send(products);
 });
 exports.getAll = getAll;

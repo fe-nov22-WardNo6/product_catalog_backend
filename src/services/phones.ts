@@ -1,6 +1,6 @@
 import { Phone } from '../models/Phone';
 import { PhoneExtended } from '../models/PhoneExtended';
-import { Op } from 'sequelize';
+import { Op, fn, where, col } from 'sequelize';
 
 export const getAll = async () => Phone.findAll();
 
@@ -8,38 +8,80 @@ export const getAllWithPagination = async (
   perPage: number,
   currentPage: number,
   sortBy: string,
+  searchQuery: string,
 ) => {
   const productsOnPage = perPage * currentPage;
   const offset = productsOnPage - perPage;
   const limit = perPage;
+  let allPhone;
+
+  const currentQuery = searchQuery;
 
   switch (sortBy) {
     case 'newest':
-      return Phone.findAll({
+      allPhone = await Phone.findAndCountAll({
         order: [['year', 'DESC']],
         offset,
         limit,
+        where: {
+          [Op.and]: [
+            where(fn('REPLACE', fn('LOWER', col('name')), ' ', ''), {
+              [Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+            }),
+          ],
+        },
       });
 
+      return allPhone;
+
     case 'cheapest':
-      return Phone.findAll({
+      allPhone = await Phone.findAndCountAll({
         order: [['price', 'ASC']],
         offset,
         limit,
+        where: {
+          [Op.and]: [
+            where(fn('REPLACE', fn('LOWER', col('name')), ' ', ''), {
+              [Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+            }),
+          ],
+        },
       });
 
+      return allPhone;
+
     case 'expensive':
-      return Phone.findAll({
+      allPhone = await Phone.findAndCountAll({
         order: [['price', 'DESC']],
         offset,
         limit,
+        where: {
+          [Op.and]: [
+            where(fn('REPLACE', fn('LOWER', col('name')), ' ', ''), {
+              [Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+            }),
+          ],
+        },
       });
 
+      return allPhone;
+
     default:
-      return Phone.findAll({
+      allPhone = await Phone.findAndCountAll({
         offset,
         limit,
+        where: {
+          [Op.and]: [
+            where(fn('REPLACE', fn('LOWER', col('name')), ' ', ''), {
+              [Op.like]: `%${currentQuery.toLowerCase().replace(/\s+/g, '')}%`,
+            }),
+          ],
+        },
       });
+
+      console.log(allPhone);
+
+      return allPhone;
   }
 };
 
